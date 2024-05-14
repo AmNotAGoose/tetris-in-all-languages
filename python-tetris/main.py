@@ -1,16 +1,46 @@
-# This is a sample Python script.
+import pygame
+import sys
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+pygame.init()
+
+BLACK = (0, 0, 0)
+WHITE = (200, 200, 200)
+WINDOW_HEIGHT = 1100
+WINDOW_WIDTH = 1000
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def main():
+    global SCREEN, CLOCK
+    pygame.init()
+    SCREEN = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.RESIZABLE)
+    CLOCK = pygame.time.Clock()
+    SCREEN.fill(BLACK)
+
+    while True:
+        draw_grid(500, 1000, 10, 10)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+        pygame.display.update()
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def draw_grid(width, height, xoffset, yoffset):
+    block_size = 50
+    grid = []
+    for x in range(0, width, block_size):
+        row = []
+        for y in range(0, height, block_size):
+            rect = pygame.Rect(x + xoffset, y + yoffset, block_size, block_size)
+            row.append([x + xoffset, y + yoffset])
+            pygame.draw.rect(SCREEN, WHITE, rect, 1)
+        grid.append(row)
+    # print(grid[1][1])
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+# def draw_tetrominoes():
+#     
+
+
+main()
